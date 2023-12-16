@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PHTRS - Poth Hole Tracking and Repair System</title>
+  <style>
+    /* CSS样式 */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    #sidebar {
+      width: 200px;
+      background-color: #f1f1f1;
+      height: 100%;
+      position: fixed;
+    }
+
+    #content {
+      margin-left: 200px;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    li:hover {
+      background-color: #ddd;
+    }
+
+    .active {
+      background-color: #ccc;
+    }
+
+    /* 表单样式 */
+    form {
+      width: 400px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="text"], input[type="number"], input[type="tel"] {
+      width: 100%;
+      padding: 5px;
+      margin-top: 5px;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+    <div class="title">
+    <h1>PHTRS - Pothole Tracking and Repair System</h1>
+    </div>
+  <div id="sidebar">
+    <ul>
+      <li>个人信息</li>
+      <li class="active">提交坑洞报告</li>
+      <li>查看工作订单</li>
+      <li>查看损害文件</li>
+    </ul>
+  </div>
+
+  <div id="content">
+    <div id="submit-report">
+      <h2>提交坑洞报告</h2>
+      <form>
+        <label for="street-address">街道地址</label>
+        <input type="text" id="street-address" name="street-address">
+
+        <label for="size">大小（1-10）</label>
+        <input type="number" id="size" name="size" min="1" max="10">
+
+        <label for="location">位置</label>
+        <input type="text" id="location" name="location">
+
+        <label for="reporter-id">报告者ID</label>
+        <input type="text" id="reporter-id" name="reporter-id">
+
+        <input type="submit" value="提交">
+      </form>
+    </div>
+
+    <div id="view-work-orders" style="display: none;">
+      <h2>查看工作订单</h2>
+      <!-- 工作订单列表 -->
+    </div>
+
+    <div id="view-damage-files" style="display: none;">
+      <h2>查看损害文件</h2>
+      <!-- 损害文件列表 -->
+    </div>
+  </div>
+
+  <script>
+    // JavaScript代码
+    // 获取菜单栏的所有li元素
+    var menuItems = document.querySelectorAll('#sidebar li');
+
+    // 遍历菜单栏的li元素，并为每个元素添加点击事件处理程序
+    menuItems.forEach(function(item) {
+      item.addEventListener('click', function() {
+        // 隐藏所有内容区域
+        var contentSections = document.querySelectorAll('#content div');
+        contentSections.forEach(function(section) {
+          section.style.display = 'none';
+        });
+
+        // 取消所有菜单项的active类
+        menuItems.forEach(function(menuItem) {
+          menuItem.classList.remove('active');
+        });
+
+        // 根据点击的菜单项显示对应的内容区域
+        var sectionId = item.innerText.toLowerCase().replace(/\s/g, '-');
+        var section = document.getElementById(sectionId);
+        section.style.display = 'block';
+
+        // 将点击的菜单项设置为active类
+        item.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
